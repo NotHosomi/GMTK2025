@@ -48,4 +48,9 @@ public class BoatVFX : MonoBehaviour
         float z = (rot % increment) - increment / 2;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, z));
     }
+
+    void OnHit()
+    {
+
+    }
 }

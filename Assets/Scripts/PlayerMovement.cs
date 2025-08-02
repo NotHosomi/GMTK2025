@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MoveRotation(rb.rotation + rotationAmount);
 
         float targetSpeed = baseSpeed;
-        if (speedInput > 0) targetSpeed = baseSpeed * 2f;
+        if (speedInput > 0) targetSpeed = baseSpeed;
         else if (speedInput < 0) targetSpeed = baseSpeed * 0.5f;
 
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, lerpRate * Time.fixedDeltaTime);

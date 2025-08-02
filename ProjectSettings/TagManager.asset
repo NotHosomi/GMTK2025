@@ -50,9 +50,15 @@ TagManager:
   - name: Crate
     uniqueID: 1505367263
     locked: 0
+  - name: Net
+    uniqueID: 2935314443
+    locked: 0
   - name: Enemy
     uniqueID: 1873741849
     locked: 0
   - name: Player
     uniqueID: 1927802529
+    locked: 0
+  - name: UI
+    uniqueID: 3410150905
     locked: 0

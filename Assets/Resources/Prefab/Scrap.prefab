@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4989678473140869921}
   - component: {fileID: 4825517958166697399}
   - component: {fileID: 2014984088676211094}
+  - component: {fileID: 4537215784466489701}
   m_Layer: 6
   m_Name: Scrap
   m_TagString: Scrap
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1505367263
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 700ef5457c2a12c4da76adfb860382fc, type: 3}
+  m_Sprite: {fileID: -5594957874766066969, guid: 7a4f4669589f95b4d80022f199019931, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,3 +100,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &4537215784466489701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637707264531752264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ba395d1162fb4d8b8658f7c920780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: -504675231508637696, guid: 7a4f4669589f95b4d80022f199019931, type: 3}
+  - {fileID: -2119776980795705870, guid: 7a4f4669589f95b4d80022f199019931, type: 3}
+  - {fileID: -5246582936344138812, guid: 7a4f4669589f95b4d80022f199019931, type: 3}
+  - {fileID: -5594957874766066969, guid: 7a4f4669589f95b4d80022f199019931, type: 3}
+  - {fileID: -2588860365257528094, guid: 7a4f4669589f95b4d80022f199019931, type: 3}
+  - {fileID: 7731262735316270364, guid: 7a4f4669589f95b4d80022f199019931, type: 3}
+  - {fileID: 3719980497975696643, guid: 7a4f4669589f95b4d80022f199019931, type: 3}

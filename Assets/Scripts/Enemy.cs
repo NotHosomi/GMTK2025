@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public static List<Enemy> s_Enemies;
     public static int s_count = 0;
 
     public float turnSpeed = 180f;
@@ -38,11 +39,13 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        s_Enemies.Add(this);
         ++s_count;
     }
 
     private void OnDestroy()
     {
+        s_Enemies.Remove(this);
         --s_count;
     }
 

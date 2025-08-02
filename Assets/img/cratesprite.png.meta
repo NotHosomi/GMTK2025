@@ -1,43 +1,28 @@
 fileFormatVersion: 2
-guid: a70dde8d0b5ea7a45b505a964615d8c8
+guid: 7a4f4669589f95b4d80022f199019931
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5750422955708942359
-    second: fishsheet_0
+      213: -504675231508637696
+    second: cratesprite_0
   - first:
-      213: -6541038502680316455
-    second: fishsheet_1
+      213: -2119776980795705870
+    second: cratesprite_1
   - first:
-      213: 736812311970224121
-    second: fishsheet_2
+      213: -5246582936344138812
+    second: cratesprite_2
   - first:
-      213: -5981303552980215880
-    second: fishsheet_3
+      213: -5594957874766066969
+    second: cratesprite_3
   - first:
-      213: 6231972809481613516
-    second: fishsheet_4
+      213: -2588860365257528094
+    second: cratesprite_4
   - first:
-      213: 6342401353251473593
-    second: fishsheet_5
+      213: 7731262735316270364
+    second: cratesprite_5
   - first:
-      213: 7904857851234215125
-    second: fishsheet_6
-  - first:
-      213: 9001210947471818077
-    second: fishsheet_7
-  - first:
-      213: 4937310021140637981
-    second: fishsheet_8
-  - first:
-      213: -6052947907373486693
-    second: fishsheet_9
-  - first:
-      213: -7710819123613859774
-    second: fishsheet_10
-  - first:
-      213: -3516129938628432267
-    second: fishsheet_11
+      213: 3719980497975696643
+    second: cratesprite_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -139,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fishsheet_0
+      name: cratesprite_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,41 +138,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e777b0f9c46230b0800000000000000
-      internalID: -5750422955708942359
+      spriteID: 0085df20d880ff8f0800000000000000
+      internalID: -504675231508637696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fishsheet_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9d5369143209935a0800000000000000
-      internalID: -6541038502680316455
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishsheet_2
+      name: cratesprite_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,41 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f79e19d4eea93a00800000000000000
-      internalID: 736812311970224121
+      spriteID: 2f53f98211a0592e0800000000000000
+      internalID: -2119776980795705870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fishsheet_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8b715dedb142efca0800000000000000
-      internalID: -5981303552980215880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishsheet_4
+      name: cratesprite_2
       rect:
         serializedVersion: 2
         x: 128
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,41 +180,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc07b07704a6c7650800000000000000
-      internalID: 6231972809481613516
+      spriteID: 4cbe492fd946037b0800000000000000
+      internalID: -5246582936344138812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fishsheet_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b8c2836d6cb40850800000000000000
-      internalID: 6342401353251473593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishsheet_6
+      name: cratesprite_3
       rect:
         serializedVersion: 2
         x: 192
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,41 +201,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d4e5ce7552b3bd60800000000000000
-      internalID: 7904857851234215125
+      spriteID: 7ea4b4dc477ba52b0800000000000000
+      internalID: -5594957874766066969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fishsheet_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d5d3a609aa9baec70800000000000000
-      internalID: 9001210947471818077
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishsheet_8
+      name: cratesprite_4
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -321,41 +222,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1960142e49d48440800000000000000
-      internalID: 4937310021140637981
+      spriteID: 2ecacb3d635821cd0800000000000000
+      internalID: -2588860365257528094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fishsheet_9
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9d2f09b2fb9ffba0800000000000000
-      internalID: -6052947907373486693
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fishsheet_10
+      name: cratesprite_5
       rect:
         serializedVersion: 2
         x: 320
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,20 +243,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24005b95cdaadf490800000000000000
-      internalID: -7710819123613859774
+      spriteID: c1dbdbbee76fa4b60800000000000000
+      internalID: 7731262735316270364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fishsheet_11
+      name: cratesprite_6
       rect:
         serializedVersion: 2
-        x: 352
+        x: 384
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -384,8 +264,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57eafe73372343fc0800000000000000
-      internalID: -3516129938628432267
+      spriteID: 30dd839bd8600a330800000000000000
+      internalID: 3719980497975696643
       vertices: []
       indices: 
       edges: []

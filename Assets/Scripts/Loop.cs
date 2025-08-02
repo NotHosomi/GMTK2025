@@ -9,7 +9,9 @@ public class Loop : MonoBehaviour
     private float mergeDist = 0.01f;
     private float MoveSpeed = 1f;
     private List<Vector2> trailPoints;
+    private List<GameObject> nettedItems;
     private List<float> moveSpeeds;
+    private List<float> nettedItemSpeeds;
     private LineRenderer line;
 
     public static Loop NewLoop(Vector2 origin, List<Vector2> trail)
@@ -24,6 +26,7 @@ public class Loop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        nettedItems = new List<GameObject>();
         line.loop = true;
         line.positionCount = trailPoints.Count;
         float greatestDist = 0;
@@ -39,8 +42,38 @@ public class Loop : MonoBehaviour
         }
         for(int i = 0; i < trailPoints.Count; ++i)
         {
-            float normalisationFactor = (trailPoints[i] - (Vector2)transform.position).magnitude;// / greatestDist);
-            moveSpeeds.Add(MoveSpeed * normalisationFactor);
+            moveSpeeds.Add(MoveSpeed * (trailPoints[i] - (Vector2)transform.position).magnitude);
+        }
+
+        nettedItemSpeeds = new List<float>();
+        foreach(Enemy e in Enemy.s_Enemies)
+        {
+            if(InNet(e.transform.position))
+            {
+                Destroy(e);
+                nettedItems.Add(e.gameObject);
+            }
+        }
+        foreach (Crate c in Crate.s_crates)
+        {
+            if (InNet(c.transform.position))
+            {
+                Destroy(c);
+                nettedItems.Add(c.gameObject);
+            }
+        }
+        foreach (Fish f in Fish.s_fish)
+        {
+            if (InNet(f.transform.position))
+            {
+                Destroy(f);
+                nettedItems.Add(f.gameObject);
+            }
+        }
+
+        for (int i = 0; i < nettedItems.Count; ++i)
+        {
+            nettedItemSpeeds.Add(MoveSpeed * ((Vector2)nettedItems[i].transform.position - (Vector2)transform.position).magnitude);
         }
     }
 
@@ -49,13 +82,7 @@ public class Loop : MonoBehaviour
     {
         for(int i = 0; i < trailPoints.Count; ++i)
         {
-            Vector2 delta = (trailPoints[i] - (Vector2)transform.position);
-            Vector2 movement = delta.normalized * Time.deltaTime * moveSpeeds[i];
-            if(movement.sqrMagnitude > delta.sqrMagnitude)
-            {
-                movement = delta;
-            }
-            trailPoints[i] -= movement;
+            trailPoints[i] = moveObj(trailPoints[i], moveSpeeds[i]);
         }
         for(int i = trailPoints.Count - 2; i > 1; --i)
         {
@@ -75,7 +102,49 @@ public class Loop : MonoBehaviour
         if(trailPoints.Count < 5)
         {
             // todo: show caught item
+            foreach(GameObject obj in nettedItems)
+            {
+                if(obj.tag == "Enemy")
+                {
+
+                }
+                Destroy(obj);
+            }
             Destroy(gameObject);
         }
     }
+
+    bool InNet(Vector2 pos)
+    {
+        int crossings = 0;
+        int count = trailPoints.Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            Vector2 a = trailPoints[i];
+            Vector2 b = trailPoints[(i + 1) % count];
+
+            // Edge cross check
+            if (((a.y > pos.y) != (b.y > pos.y)) &&
+                (pos.x < (b.x - a.x) * (pos.y - a.y) / (b.y - a.y) + a.x))
+            {
+                crossings++;
+            }
+        }
+
+        // Inside if odd
+        return (crossings % 2) == 1;
+    }
+
+    Vector2 moveObj(Vector2 currentPos, float speed)
+    {
+        Vector2 delta = (currentPos - (Vector2)transform.position);
+        Vector2 movement = delta.normalized * Time.deltaTime * speed;
+        if (movement.sqrMagnitude > delta.sqrMagnitude)
+        {
+            movement = delta;
+        }
+        return currentPos - movement;
+    }
 }
+

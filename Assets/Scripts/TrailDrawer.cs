@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TrailDrawer : MonoBehaviour
 {
+    public static TrailDrawer _i;
     float LineLength = 20;
     public float pointSpacing = 0.1f;
     public float minLoopDistance = 0.5f;
@@ -17,6 +18,7 @@ public class TrailDrawer : MonoBehaviour
 
     void Awake()
     {
+        _i = this;
         line = GetComponent<LineRenderer>();
         line.positionCount = 0;
         line.loop = false;
@@ -112,10 +114,22 @@ public class TrailDrawer : MonoBehaviour
     // scrap
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Scrap"))
+        if (collision.gameObject.CompareTag("Scrap"))
         {
             Destroy(collision.gameObject);
             ++LineLength;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if(LineLength == 0)
+            {
+                // todo: endgame
+            }
+            LineLength -= 5;
+            if(LineLength < 5)
+            {
+                LineLength = 0;
+            }
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ResourceSpawner : MonoBehaviour
 {
+
+
     float scrapClock = 0;
     float fishClock = 0;
     float enemyClock = 0;
@@ -11,9 +13,11 @@ public class ResourceSpawner : MonoBehaviour
     int fishLimit = 13;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        Enemy.s_Enemies = new List<Enemy>();
+        Crate.s_crates = new List<Crate>();
+        Fish.s_fish = new List<Fish>();
     }
 
     // Update is called once per frame
@@ -28,7 +32,8 @@ public class ResourceSpawner : MonoBehaviour
         fishClock -= Time.deltaTime; ;
         if(fishClock < 0)
         {
-
+            SpawnFish();
+            scrapClock = Random.Range(0.5f, 2.5f);
         }
         enemyClock -= Time.deltaTime; ;
         if(enemyClock < 0)
