@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 249899246}
   - component: {fileID: 249899245}
   - component: {fileID: 249899251}
+  - component: {fileID: 249899252}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -430,6 +431,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.5}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &249899252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249899244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef66edcbde0dcf040a0bbfec91733efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wakePrefab: {fileID: 5397117014936509089, guid: e815559a37b0f704f980b0fea30f55dc, type: 3}
+  wakeSprites:
+  - {fileID: 2398951675677989596, guid: 371c11792e636424eb23e2e580d3412b, type: 3}
+  - {fileID: 1222423162917627938, guid: 371c11792e636424eb23e2e580d3412b, type: 3}
+  - {fileID: -6557695747136234384, guid: 371c11792e636424eb23e2e580d3412b, type: 3}
+  spawnOffsetBack: 0.5
+  spawnOffsetDown: 0
 --- !u!1 &332644477
 GameObject:
   m_ObjectHideFlags: 0
