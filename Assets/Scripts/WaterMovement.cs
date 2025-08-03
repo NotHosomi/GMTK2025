@@ -18,7 +18,7 @@ public class WaterMovement : MonoBehaviour
         float time = Time.time * frequency;
         Vector2 primary = direction.normalized * Mathf.Sin(time) * amplitude;
 
-        Vector2 perpendicular = new Vector3(-direction.y, direction.x).normalized;
+        Vector2 perpendicular = new Vector2(-direction.y, direction.x).normalized;
         Vector2 swirl = perpendicular * Mathf.Cos(time) * (amplitude * 0.5f);
 
         transform.localPosition = startPos + primary + swirl;
