@@ -116,7 +116,7 @@ public class TrailDrawer : MonoBehaviour
         if (collision.gameObject.GetComponent<Crate>() && !collision.gameObject.GetComponent<Crate>().isNetted)
         {
             Destroy(collision.gameObject);
-            ++LineLength;
+            ModifyLineLength(1);
         }
         if (collision.gameObject.GetComponent<Enemy>())
         {
@@ -125,22 +125,27 @@ public class TrailDrawer : MonoBehaviour
             {
                 // todo: endgame
             }
-            LineLength -= 5;
-            if (LineLength < 5)
-            {
-                LineLength = 0;
-            }
-            while (trailPoints.Count * pointSpacing > LineLength)
-            {
-                trailPoints.RemoveAt(0);
-            }
-            line.positionCount = trailPoints.Count;
-            for (int i = 0; i < trailPoints.Count; ++i)
-            {
-                line.SetPosition(i, trailPoints[i]);
-            }
+            ModifyLineLength(-5);
         }
     }
+
+    public void ModifyLineLength(float delta)
+    {
+        LineLength += delta;
+        if (LineLength < 0) LineLength = 0;
+
+        while (trailPoints.Count * pointSpacing > LineLength)
+        {
+            trailPoints.RemoveAt(0);
+        }
+
+        line.positionCount = trailPoints.Count;
+        for (int i = 0; i < trailPoints.Count; ++i)
+        {
+            line.SetPosition(i, trailPoints[i]);
+        }
+    }
+
 
     public List<Vector2> GetTrail()
     {

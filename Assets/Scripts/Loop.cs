@@ -112,16 +112,18 @@ public class Loop : MonoBehaviour
             {
                 if(obj.tag == "Enemy")
                 {
-                    TrailDrawer._i.LineLength += 5;
+                    if (TrailDrawer._i != null) TrailDrawer._i.ModifyLineLength(5);
                 }
                 else if (obj.tag == "Crate")
                 {
-                    TrailDrawer._i.LineLength += 2;
+                    if (TrailDrawer._i != null) TrailDrawer._i.ModifyLineLength(2);
                 }
                 else if (obj.tag == "Fish")
                 {
                     Score._i.AddScore(obj.transform.localScale.x);
                 }
+                if (obj == null) continue;
+                if (!obj.activeInHierarchy) continue;
                 Destroy(obj);
             }
             Destroy(gameObject);
