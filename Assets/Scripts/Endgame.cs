@@ -36,7 +36,7 @@ public class Endgame : MonoBehaviour
                 {
                     if (hit.collider.name == "ExitBtn")
                     {
-                        SceneManager.LoadScene("MainMenu");
+                        SceneManager.LoadScene("Menu");
                     }
                     else if (hit.collider.name == "RetryBtn")
                     {
