@@ -12,8 +12,14 @@ public class TrailDrawer : MonoBehaviour
     private List<Vector2> trailPoints = new List<Vector2>();
     private LineRenderer line;
 
+    bool gameover = false;
+
     void Awake()
     {
+        if(_i != null)
+        {
+            Destroy(_i);
+        }
         _i = this;
         line = GetComponent<LineRenderer>();
         line.positionCount = 0;
@@ -92,6 +98,7 @@ public class TrailDrawer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(gameover) { return; }
         if (collision.gameObject.GetComponent<Crate>() && !collision.gameObject.GetComponent<Crate>().isNetted)
         {
             Destroy(collision.gameObject);
@@ -102,7 +109,9 @@ public class TrailDrawer : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().OnHit();
             if (LineLength == 0)
             {
-                // todo: endgame
+                gameover = true;
+                Score._i.OnGameover();
+                GameObject.Find("endgame").GetComponent<Endgame>().Run();
             }
             ModifyLineLength(-5);
         }

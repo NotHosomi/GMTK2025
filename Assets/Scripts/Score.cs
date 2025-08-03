@@ -8,14 +8,18 @@ public class Score : MonoBehaviour
     public static Score _i;
     [SerializeField] TextMeshProUGUI display;
 
-    int score;
+    int score = 0;
+    int fish = 0;
+    int ships = 0;
+    bool lockScore = false;
     // Start is called before the first frame update
     void Start()
     {
-        if(_i == null)
+        if(_i != null)
         {
-            _i = this;
+            Destroy(_i);
         }
+        _i = this;
     }
 
     // Update is called once per frame
@@ -24,9 +28,26 @@ public class Score : MonoBehaviour
         
     }
 
-    public void AddScore(float points)
+    public void AddScore(float points, bool isEnemy)
     {
+        if(lockScore) { return; }
+
+        if(isEnemy)
+        {
+            ++ships;
+        }
+        else
+        {
+            ++fish;
+        }
         score += (int)points;
         display.SetText(score.ToString());
+    }
+
+    public void OnGameover()
+    {
+        lockScore = true;
+        GameObject.Find("FishVal").GetComponent<TextMeshPro>().SetText(fish.ToString());
+        GameObject.Find("ShipsVal").GetComponent<TextMeshPro>().SetText(fish.ToString());
     }
 }

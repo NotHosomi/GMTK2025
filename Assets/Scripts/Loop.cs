@@ -113,7 +113,7 @@ public class Loop : MonoBehaviour
                 if(obj.tag == "Enemy")
                 {
                     //if (TrailDrawer._i != null) TrailDrawer._i.ModifyLineLength(5);
-                    Score._i.AddScore(80);
+                    Score._i.AddScore(80, true);
                 }
                 else if (obj.tag == "Crate")
                 {
@@ -121,7 +121,7 @@ public class Loop : MonoBehaviour
                 }
                 else if (obj.tag == "Fish")
                 {
-                    Score._i.AddScore(obj.transform.localScale.x * 100);
+                    Score._i.AddScore(obj.transform.localScale.x * 100, false);
                 }
                 if (obj == null) continue;
                 if (!obj.activeInHierarchy) continue;

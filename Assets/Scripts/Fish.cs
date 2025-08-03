@@ -17,7 +17,10 @@ public class Fish : MonoBehaviour
     }
     private void Awake()
     {
-        s_fish.Add(this);
+        if (s_fish != null)
+        {
+            s_fish.Add(this);
+        }
         sr = GetComponent<SpriteRenderer>();
     }
 

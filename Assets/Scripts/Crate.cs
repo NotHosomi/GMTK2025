@@ -11,7 +11,10 @@ public class Crate : MonoBehaviour
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        s_crates.Add(this);
+        if(s_crates != null)
+        {
+            s_crates.Add(this);
+        }
     }
 
     private void Update()
