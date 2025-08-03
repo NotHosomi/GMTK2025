@@ -27,7 +27,7 @@ public class Loop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SFX._i.PlaySound(SFX.E_Sfx.bad);
+        SFX._i.PlaySound(SFX.E_Sfx.good);
         nettedItems = new List<GameObject>();
         line.loop = true;
         line.positionCount = trailPoints.Count;
@@ -129,13 +129,9 @@ public class Loop : MonoBehaviour
                 }
                 if(amount > 100)
                 {
-                    SFX._i.PlaySound(SFX.E_Sfx.verygood);
-                }
-                else if(amount != 0)
-                {
                     SFX._i.PlaySound(SFX.E_Sfx.good);
                 }
-                else
+                else if(amount != 0)
                 {
                     SFX._i.PlaySound(SFX.E_Sfx.bad);
                 }
