@@ -31,10 +31,13 @@ public class TrailDrawer : MonoBehaviour
         if (trailPoints.Count == 0 || Vector2.Distance(currentPos, trailPoints[trailPoints.Count - 1]) > pointSpacing)
         {
             trailPoints.Add(currentPos);
-            if(trailPoints.Count * pointSpacing >= LineLength)
+            if (GetTrailLength() >= LineLength)
             { // at limit
                 reachedLimit = true;
-                trailPoints.RemoveAt(0);
+                while (GetTrailLength() >= LineLength && trailPoints.Count > 1)
+                {
+                    trailPoints.RemoveAt(0);
+                }
                 if (line.positionCount != trailPoints.Count)
                 { // For some reason, if a loop is created while at the lenght limit, the line position count gets trimmed BEFORE the trim function occurs??
                     Debug.Log("[ERROR] V:" + trailPoints.Count + "\tL:" + line.positionCount);
@@ -151,4 +154,15 @@ public class TrailDrawer : MonoBehaviour
     {
         return trailPoints;
     }
+
+    float GetTrailLength()
+    {
+        float length = 0f;
+        for (int i = 1; i < trailPoints.Count; i++)
+        {
+            length += Vector2.Distance(trailPoints[i - 1], trailPoints[i]);
+        }
+        return length;
+    }
+
 }
