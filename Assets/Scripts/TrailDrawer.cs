@@ -6,15 +6,11 @@ using UnityEngine;
 public class TrailDrawer : MonoBehaviour
 {
     public static TrailDrawer _i;
-    public float LineLength = 20;
+    public float LineLength = 40;
     public float pointSpacing = 0.1f;
     public float minLoopDistance = 0.5f;
     private List<Vector2> trailPoints = new List<Vector2>();
     private LineRenderer line;
-
-    bool reachedLimit = false;
-    bool trimmed = false;
-    bool pauseOnNext = false;
 
     void Awake()
     {
@@ -27,26 +23,21 @@ public class TrailDrawer : MonoBehaviour
 
     void Update()
     {
+        if (line.positionCount > trailPoints.Count)
+        {
+            UpdateLineRenderer();
+        }
         Vector2 currentPos = transform.position;
-        if (trailPoints.Count == 0 || Vector2.Distance(currentPos, trailPoints[trailPoints.Count - 1]) > pointSpacing)
+        if (trailPoints.Count == 0 || (currentPos - trailPoints[trailPoints.Count - 1]).magnitude > pointSpacing)
         {
             trailPoints.Add(currentPos);
-            if (GetTrailLength() >= LineLength)
+            if (trailPoints.Count * pointSpacing >= LineLength)
             { // at limit
-                reachedLimit = true;
-                while (GetTrailLength() >= LineLength && trailPoints.Count > 1)
+                while (trailPoints.Count * pointSpacing >= LineLength && trailPoints.Count > 1)
                 {
                     trailPoints.RemoveAt(0);
                 }
-                if (line.positionCount != trailPoints.Count)
-                { // For some reason, if a loop is created while at the lenght limit, the line position count gets trimmed BEFORE the trim function occurs??
-                    Debug.Log("[ERROR] V:" + trailPoints.Count + "\tL:" + line.positionCount);
-                    line.positionCount = trailPoints.Count;
-                }
-                for (int i = 0; i < trailPoints.Count; ++i)
-                {
-                    line.SetPosition(i, trailPoints[i]);
-                }
+                UpdateLineRenderer();
             }
             else
             { // growing
@@ -54,8 +45,6 @@ public class TrailDrawer : MonoBehaviour
                 line.SetPosition(trailPoints.Count - 1, currentPos);
             }
         }
-
-        trimmed = false;
         DetectLoop(currentPos);
     }
 
@@ -81,23 +70,12 @@ public class TrailDrawer : MonoBehaviour
         }
     }
 
-    void ClearTrail()
-    {
-        trailPoints.Clear();
-        line.positionCount = 0;
-    }
-
     void TrimTrail(int Idx)
     {
-        trimmed = true;
         int count = (trailPoints.Count - 2) - Idx;
         Loop.NewLoop(trailPoints[trailPoints.Count - 1], trailPoints.GetRange(Idx, count));
         trailPoints.RemoveRange(Idx + 1, count);
-        line.positionCount = trailPoints.Count;
-        for (int i = 0; i < trailPoints.Count; ++i)
-        {
-            line.SetPosition(i, trailPoints[i]);
-        }
+        UpdateLineRenderer();
         LineLength = trailPoints.Count * pointSpacing;
     }
 
@@ -112,8 +90,6 @@ public class TrailDrawer : MonoBehaviour
         return t > 0 && t < 1 && u > 0 && u < 1;
     }
 
-
-    // scrap
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Crate>() && !collision.gameObject.GetComponent<Crate>().isNetted)
@@ -142,11 +118,7 @@ public class TrailDrawer : MonoBehaviour
             trailPoints.RemoveAt(0);
         }
 
-        line.positionCount = trailPoints.Count;
-        for (int i = 0; i < trailPoints.Count; ++i)
-        {
-            line.SetPosition(i, trailPoints[i]);
-        }
+        UpdateLineRenderer();
     }
 
 
@@ -165,4 +137,12 @@ public class TrailDrawer : MonoBehaviour
         return length;
     }
 
+    public void UpdateLineRenderer()
+    {
+        line.positionCount = trailPoints.Count;
+        for (int i = 0; i < trailPoints.Count; ++i)
+        {
+            line.SetPosition(i, trailPoints[i]);
+        }
+    }
 }

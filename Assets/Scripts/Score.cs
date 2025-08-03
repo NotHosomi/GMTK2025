@@ -24,9 +24,9 @@ public class Score : MonoBehaviour
         
     }
 
-    public void AddScore(float fishSize)
+    public void AddScore(float points)
     {
-        score += (int)(fishSize * 100);
+        score += (int)points;
         display.SetText(score.ToString());
     }
 }
