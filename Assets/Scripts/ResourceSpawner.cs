@@ -63,7 +63,6 @@ public class ResourceSpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        const float val = 25.0f;
         float x = 0;
         float y = 0;
         float rot = 0;
@@ -71,23 +70,23 @@ public class ResourceSpawner : MonoBehaviour
         switch (edge)
         {
             case 0: // top
-                y = (val + 2);
-                x = Random.Range(-val, val);
+                y = (25 + 2);
+                x = Random.Range(-32, 32);
                 rot = 180;
                 break;
             case 1: // bottom
-                y = -(val + 2);
-                x = Random.Range(-val, val);
+                y = -(25 + 2);
+                x = Random.Range(-32, 32);
                 rot = 0;
                 break;
             case 2: // left
-                x = -(val + 2);
-                y = Random.Range(-val, val);
+                x = -(33.333f + 2);
+                y = Random.Range(-25, 25);
                 rot = 90;
                 break;
             case 3: // right
-                x = (val + 2);
-                y = Random.Range(-val, val);
+                x = (33.333f + 2);
+                y = Random.Range(-25, 25);
                 rot = 270;
                 break;
         }
