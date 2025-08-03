@@ -52,10 +52,16 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoodSelect();
+        MoodAct();
+    }
+
+    void MoodSelect()
+    {
         moodClock -= Time.deltaTime;
-        if(moodClock < 0)
+        if (moodClock < 0)
         {
-            switch(mood)
+            switch (mood)
             {
                 case E_Mood.attacking:
                     mood = E_Mood.fleeing;
@@ -75,7 +81,7 @@ public class Enemy : MonoBehaviour
                         mood = E_Mood.meandering;
                         moodClock = Random.Range(3.0f, 5.0f);
                     }
-                    if(mood == E_Mood.meandering)
+                    if (mood == E_Mood.meandering)
                     {
                         targetSpeed = speedLo;
                     }
@@ -86,7 +92,11 @@ public class Enemy : MonoBehaviour
                     break;
             }
         }
-        switch(mood)
+    }
+
+    void MoodAct()
+    {
+        switch (mood)
         {
             case E_Mood.attacking:
                 Attack();
@@ -108,7 +118,7 @@ public class Enemy : MonoBehaviour
     void Attack()
     {
         // in range?
-        if((player.position - transform.position).magnitude < 4)
+        if((player.position - transform.position).magnitude < 1)
         {
             targetSpeed = speedBase;
             TurnAway();
@@ -178,12 +188,13 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        CollisionAvoidance(TrailDrawer._i.GetTrail());
+
         float rotationAmount = turnInput * turnSpeed * Time.fixedDeltaTime;
         rb.MoveRotation(rb.rotation + rotationAmount);
 
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, lerpRate * Time.fixedDeltaTime);
 
-        // todo: do a series of rays in front, if they touch the net, turn
 
         rb.velocity = transform.up * currentSpeed;
     }
@@ -202,5 +213,90 @@ public class Enemy : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position, player.position);
+
+        Gizmos.color = debugLhit ? Color.red : Color.blue;
+        Gizmos.DrawLine(transform.position, debugLRay);
+        Gizmos.color = debugChit ? Color.red : Color.blue;
+        Gizmos.DrawLine(transform.position, debugCRay);
+        Gizmos.color = debugRhit ? Color.red : Color.blue;
+        Gizmos.DrawLine(transform.position, debugRRay);
+    }
+
+    public void OnHit()
+    {
+        mood = E_Mood.fleeing;
+        moodClock = Random.Range(4.0f, 6.0f);
+    }
+
+
+    Vector2 debugLRay;
+    Vector2 debugCRay;
+    Vector2 debugRRay;
+    bool debugLhit;
+    bool debugChit;
+    bool debugRhit;
+    // bounds check
+    void CollisionAvoidance(List<Vector2> collider)
+    {
+        Vector2 leftQ = transform.rotation * new Vector2(-1f, 4);
+        Vector2 centerQ = transform.rotation * new Vector2(0, 6);
+        Vector2 rightQ = transform.rotation * new Vector2(1f, 4);
+        leftQ += (Vector2)transform.position;
+        rightQ += (Vector2)transform.position;
+        centerQ += (Vector2)transform.position;
+        debugLRay = leftQ;
+        debugCRay = centerQ;
+        debugRRay = rightQ;
+
+        float L = 0;
+        float R = 0;
+        float C = 0;
+        for (int i = 0; i < collider.Count - 1; ++i)
+        {
+            float temp = LineIntersection(transform.position, leftQ, collider[i], collider[i + 1]);
+            if (temp > L) { L = temp; }
+            temp = LineIntersection(transform.position, rightQ, collider[i], collider[i + 1]);
+            if (temp > R) { R = temp; }
+            temp = LineIntersection(transform.position, centerQ, collider[i], collider[i + 1]);
+            if (temp > C) { C = temp; }
+        }
+        debugRhit = R != 0;
+        debugLhit = L != 0;
+        debugChit = C != 0 && R != 0 && L != 0;
+        if (R == 0 && L == 0) { return; }
+        if (R > 0 && L > 0)
+        {
+            if (C > 0)
+            {
+                turnInput = 2.5f;
+                return;
+            }
+        }
+        if (R >= L)
+        {
+            turnInput = R * 2 + 0.5f;
+        }
+        else
+        {
+            turnInput = -(L * 2 + 0.5f);
+        }
+    }
+    float LineIntersection(Vector2 QueryOrigin, Vector2 QueryEnd, Vector2 LineStart, Vector2 LineEnd)
+    {
+        Vector2 A = QueryOrigin;
+        Vector2 B = QueryEnd;
+        Vector2 C = LineStart;
+        Vector2 D = LineEnd;
+        float denominator = (A.x - B.x) * (C.y - D.y) - (A.y - B.y) * (C.x - D.x);
+        if (denominator == 0) return 0;
+
+        float t = ((A.x - C.x) * (C.y - D.y) - (A.y - C.y) * (C.x - D.x)) / denominator;
+        float u = ((A.x - C.x) * (A.y - B.y) - (A.y - C.y) * (A.x - B.x)) / denominator;
+
+        if (!(t > 0 && t < 1 && u > 0 && u < 1))
+        {
+            return 0;
+        }
+        return 1 - t;
     }
 }

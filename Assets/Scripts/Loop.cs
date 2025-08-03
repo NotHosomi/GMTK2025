@@ -8,6 +8,7 @@ public class Loop : MonoBehaviour
 {
     private float mergeDist = 0.01f;
     private float MoveSpeed = 1f;
+    private float itemMoveSpeed = 0.5f;
     private List<Vector2> trailPoints;
     private List<GameObject> nettedItems;
     private List<float> moveSpeeds;
@@ -51,6 +52,7 @@ public class Loop : MonoBehaviour
             if(InNet(e.transform.position))
             {
                 Destroy(e);
+                e.GetComponent<Rigidbody2D>().simulated = false;
                 nettedItems.Add(e.gameObject);
             }
         }
@@ -58,7 +60,7 @@ public class Loop : MonoBehaviour
         {
             if (InNet(c.transform.position))
             {
-                Destroy(c);
+                c.isNetted = true;
                 nettedItems.Add(c.gameObject);
             }
         }
@@ -66,20 +68,24 @@ public class Loop : MonoBehaviour
         {
             if (InNet(f.transform.position))
             {
-                Destroy(f);
+                f.isNetted = true;
                 nettedItems.Add(f.gameObject);
             }
         }
 
         for (int i = 0; i < nettedItems.Count; ++i)
         {
-            nettedItemSpeeds.Add(MoveSpeed * ((Vector2)nettedItems[i].transform.position - (Vector2)transform.position).magnitude);
+            nettedItemSpeeds.Add(itemMoveSpeed * ((Vector2)nettedItems[i].transform.position - (Vector2)transform.position).magnitude);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        for(int i = 0; i < nettedItems.Count; ++i)
+        {
+            nettedItems[i].transform.position = moveObj(nettedItems[i].transform.position, nettedItemSpeeds[i]);
+        }
         for(int i = 0; i < trailPoints.Count; ++i)
         {
             trailPoints[i] = moveObj(trailPoints[i], moveSpeeds[i]);
@@ -101,12 +107,20 @@ public class Loop : MonoBehaviour
         }
         if(trailPoints.Count < 5)
         {
-            // todo: show caught item
+            // todo: show caught items
             foreach(GameObject obj in nettedItems)
             {
                 if(obj.tag == "Enemy")
                 {
-
+                    TrailDrawer._i.LineLength += 5;
+                }
+                else if (obj.tag == "Crate")
+                {
+                    TrailDrawer._i.LineLength += 2;
+                }
+                else if (obj.tag == "Fish")
+                {
+                    Score._i.AddScore(obj.transform.localScale.x);
                 }
                 Destroy(obj);
             }

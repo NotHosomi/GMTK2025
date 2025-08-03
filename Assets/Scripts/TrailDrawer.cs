@@ -6,7 +6,7 @@ using UnityEngine;
 public class TrailDrawer : MonoBehaviour
 {
     public static TrailDrawer _i;
-    float LineLength = 20;
+    public float LineLength = 20;
     public float pointSpacing = 0.1f;
     public float minLoopDistance = 0.5f;
     private List<Vector2> trailPoints = new List<Vector2>();
@@ -96,7 +96,6 @@ public class TrailDrawer : MonoBehaviour
             line.SetPosition(i, trailPoints[i]);
         }
         LineLength = trailPoints.Count * pointSpacing;
-        Debug.Log("[TRIMMED] V:" + trailPoints.Count + "\tL:" + line.positionCount);
     }
 
     bool LinesIntersect(Vector2 A, Vector2 B, Vector2 C, Vector2 D)
@@ -114,13 +113,14 @@ public class TrailDrawer : MonoBehaviour
     // scrap
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Scrap"))
+        if (collision.gameObject.GetComponent<Crate>() && !collision.gameObject.GetComponent<Crate>().isNetted)
         {
             Destroy(collision.gameObject);
             ++LineLength;
         }
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.GetComponent<Enemy>())
         {
+            collision.gameObject.GetComponent<Enemy>().OnHit();
             if(LineLength == 0)
             {
                 // todo: endgame
@@ -131,5 +131,10 @@ public class TrailDrawer : MonoBehaviour
                 LineLength = 0;
             }
         }
+    }
+
+    public List<Vector2> GetTrail()
+    {
+        return trailPoints;
     }
 }

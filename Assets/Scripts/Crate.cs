@@ -7,9 +7,16 @@ public class Crate : MonoBehaviour
 
     public static List<Crate> s_crates;
     SpriteRenderer sr;
+    public bool isNetted = false;
     private void Awake()
     {
+        sr = GetComponent<SpriteRenderer>();
         s_crates.Add(this);
+    }
+
+    private void Update()
+    {
+        Animate();
     }
 
     private void OnDestroy()
@@ -18,9 +25,9 @@ public class Crate : MonoBehaviour
     }
 
     [SerializeField] List<Sprite> frames;
-    const float frameTime = 1.0f / 12.0f;
-    float animClock = 0;
-    int frameIdx = 0;
+    const float frameTime = 1.0f / 8.0f;
+    float animClock = frameTime;
+    int frameIdx = 4;
     void Animate()
     {
         animClock -= Time.deltaTime;

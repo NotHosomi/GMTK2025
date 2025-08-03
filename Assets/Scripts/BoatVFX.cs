@@ -39,7 +39,6 @@ public class BoatVFX : MonoBehaviour
         float increment = 45;
         rot += increment / 2;
         int dir = (int)(rot / increment) % 8;
-        Debug.Log(dir);
         hullSR.sprite = hullSheet[dir];
         if(sailSR != null)
         {

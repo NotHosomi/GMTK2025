@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8405240763207961909}
   m_Layer: 8
   m_Name: Fish
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -5750422955708942359, guid: a70dde8d0b5ea7a45b505a964615d8c8, type: 3}
-  m_Color: {r: 0.16353686, g: 0.2797086, b: 0.46226418, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac5916fccbe1a7448c443e2cc5fb74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isNetted: 0
   frames:
   - {fileID: -5750422955708942359, guid: a70dde8d0b5ea7a45b505a964615d8c8, type: 3}
   - {fileID: -6541038502680316455, guid: a70dde8d0b5ea7a45b505a964615d8c8, type: 3}

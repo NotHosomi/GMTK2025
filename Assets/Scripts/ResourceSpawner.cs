@@ -9,8 +9,7 @@ public class ResourceSpawner : MonoBehaviour
     float scrapClock = 0;
     float fishClock = 0;
     float enemyClock = 0;
-    int enemyLimit = 5;
-    int fishLimit = 13;
+    int enemyLimit = 6;
 
     // Start is called before the first frame update
     void Awake()
@@ -33,7 +32,7 @@ public class ResourceSpawner : MonoBehaviour
         if(fishClock < 0)
         {
             SpawnFish();
-            scrapClock = Random.Range(0.5f, 2.5f);
+            fishClock = Random.Range(1f, 4f);
         }
         enemyClock -= Time.deltaTime; ;
         if(enemyClock < 0)
@@ -48,9 +47,8 @@ public class ResourceSpawner : MonoBehaviour
 
     void SpawnScrap()
     {
-        const float val = 25.0f;
-        float x = Random.Range(-val, val);
-        float y = Random.Range(-val, val);
+        float x = Random.Range(-32, 32);
+        float y = Random.Range(-24, 24);
         GameObject obj = GameObject.Instantiate(Resources.Load("Prefab/Scrap")) as GameObject;
         obj.transform.position = new Vector3(x, y, 0);
     }
@@ -58,8 +56,8 @@ public class ResourceSpawner : MonoBehaviour
     void SpawnFish()
     {
         const float val = 25.0f;
-        float x = Random.Range(-val, val);
-        float y = Random.Range(-val, val);
+        float x = Random.Range(-32, 32);
+        float y = Random.Range(-24, 24);
         Fish.NewFish(new Vector2(x, y));
     }
 
