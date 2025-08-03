@@ -6,7 +6,7 @@ using UnityEngine;
 public class TrailDrawer : MonoBehaviour
 {
     public static TrailDrawer _i;
-    public float LineLength = 40;
+    public float LineLength = 15;
     public float pointSpacing = 0.1f;
     public float minLoopDistance = 0.5f;
     private List<Vector2> trailPoints = new List<Vector2>();
@@ -102,7 +102,7 @@ public class TrailDrawer : MonoBehaviour
         if (collision.gameObject.GetComponent<Crate>() && !collision.gameObject.GetComponent<Crate>().isNetted)
         {
             Destroy(collision.gameObject);
-            ModifyLineLength(1);
+            ModifyLineLength(3);
             SFX._i.PlaySound(SFX.E_Sfx.splash);
         }
         if (collision.gameObject.GetComponent<Enemy>())

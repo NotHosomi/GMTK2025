@@ -26,7 +26,7 @@ public class ResourceSpawner : MonoBehaviour
         if(scrapClock < 0)
         {
             SpawnScrap();
-            scrapClock = Random.Range(0.5f, 2.5f);
+            scrapClock = Random.Range(1.5f, 2.5f);
         }
         fishClock -= Time.deltaTime; ;
         if(fishClock < 0)
