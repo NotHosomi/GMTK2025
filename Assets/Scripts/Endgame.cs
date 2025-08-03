@@ -14,6 +14,7 @@ public class Endgame : MonoBehaviour
     public void Run()
     {
         running = true;
+        SFX._i.PlaySound(SFX.E_Sfx.womp);
     }
     // Start is called before the first frame update
     void Start()

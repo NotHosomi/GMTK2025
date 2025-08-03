@@ -103,9 +103,11 @@ public class TrailDrawer : MonoBehaviour
         {
             Destroy(collision.gameObject);
             ModifyLineLength(1);
+            SFX._i.PlaySound(SFX.E_Sfx.splash);
         }
         if (collision.gameObject.GetComponent<Enemy>())
         {
+            SFX._i.PlaySound(SFX.E_Sfx.crunch);
             collision.gameObject.GetComponent<Enemy>().OnHit();
             if (LineLength == 0)
             {
@@ -113,6 +115,7 @@ public class TrailDrawer : MonoBehaviour
                 Score._i.OnGameover();
                 GameObject.Find("endgame").GetComponent<Endgame>().Run();
             }
+
             ModifyLineLength(-5);
         }
     }

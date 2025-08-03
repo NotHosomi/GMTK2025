@@ -27,6 +27,7 @@ public class Loop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SFX._i.PlaySound(SFX.E_Sfx.bad);
         nettedItems = new List<GameObject>();
         line.loop = true;
         line.positionCount = trailPoints.Count;
@@ -107,6 +108,7 @@ public class Loop : MonoBehaviour
         }
         if(trailPoints.Count < 5)
         {
+            int amount = 0;
             // todo: show caught items
             foreach(GameObject obj in nettedItems)
             {
@@ -114,6 +116,7 @@ public class Loop : MonoBehaviour
                 {
                     //if (TrailDrawer._i != null) TrailDrawer._i.ModifyLineLength(5);
                     Score._i.AddScore(80, true);
+                    amount += 80;
                 }
                 else if (obj.tag == "Crate")
                 {
@@ -122,6 +125,19 @@ public class Loop : MonoBehaviour
                 else if (obj.tag == "Fish")
                 {
                     Score._i.AddScore(obj.transform.localScale.x * 100, false);
+                    amount += (int)(obj.transform.localScale.x * 100);
+                }
+                if(amount > 100)
+                {
+                    SFX._i.PlaySound(SFX.E_Sfx.verygood);
+                }
+                else if(amount != 0)
+                {
+                    SFX._i.PlaySound(SFX.E_Sfx.good);
+                }
+                else
+                {
+                    SFX._i.PlaySound(SFX.E_Sfx.bad);
                 }
                 if (obj == null) continue;
                 if (!obj.activeInHierarchy) continue;
