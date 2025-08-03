@@ -121,14 +121,23 @@ public class TrailDrawer : MonoBehaviour
         if (collision.gameObject.GetComponent<Enemy>())
         {
             collision.gameObject.GetComponent<Enemy>().OnHit();
-            if(LineLength == 0)
+            if (LineLength == 0)
             {
                 // todo: endgame
             }
             LineLength -= 5;
-            if(LineLength < 5)
+            if (LineLength < 5)
             {
                 LineLength = 0;
+            }
+            while (trailPoints.Count * pointSpacing > LineLength)
+            {
+                trailPoints.RemoveAt(0);
+            }
+            line.positionCount = trailPoints.Count;
+            for (int i = 0; i < trailPoints.Count; ++i)
+            {
+                line.SetPosition(i, trailPoints[i]);
             }
         }
     }

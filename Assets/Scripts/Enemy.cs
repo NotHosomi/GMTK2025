@@ -121,7 +121,6 @@ public class Enemy : MonoBehaviour
         if((player.position - transform.position).magnitude < 1)
         {
             targetSpeed = speedBase;
-            TurnAway();
         }
         else
         {
